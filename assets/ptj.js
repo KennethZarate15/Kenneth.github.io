@@ -153,6 +153,15 @@ function scrollUp() {
 }
 window.addEventListener("scroll", scrollUp);
 
+// Add click event to scroll up button
+document.getElementById("scroll-up").addEventListener("click", function(e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
 /*==================== DARK LIGHT THEME ====================*/
 const themeButton = document.getElementById("theme-button");
 const darkTheme = "dark-theme";

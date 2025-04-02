@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kenneth V. Zarate | Portfolio</title>
-    <link rel="stylesheet" href="assets/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/swipe.css" />
     <link rel="stylesheet" href="assets/newcss.css" />
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
   </head>
@@ -60,8 +60,23 @@
     <!-- main-->
 
     <main class="main">
-      <div class="fireflies-container">
-        <!-- Generated via JavaScript -->
+      <div class="tech-background">
+        <i class="uil uil-html5-alt tech-icon"></i>
+        <i class="uil uil-css3-simple tech-icon"></i>
+        <i class="uil uil-java-script tech-icon"></i>
+        <i class="uil uil-react tech-icon"></i>
+        <i class="uil uil-github tech-icon"></i>
+        <i class="uil uil-database tech-icon"></i>
+        <i class="uil uil-server-network tech-icon"></i>
+        <i class="uil uil-cloud-computing tech-icon"></i>
+        <i class="uil uil-visual-studio tech-icon"></i>
+        <i class="uil uil-docker tech-icon"></i>
+        <i class="uil uil-python tech-icon"></i>
+        <i class="uil uil-java tech-icon"></i>
+        <i class="uil uil-code-branch tech-icon"></i>
+        <i class="uil uil-terminal tech-icon"></i>
+        <i class="uil uil-browser tech-icon"></i>
+        <i class="uil uil-window tech-icon"></i>
       </div>
       <!--========================= Home =====================-->
 
@@ -419,8 +434,111 @@
       <i class="uil uil-arrow-up scrollup__icon"></i>
     </a>
 
-    <script type="text/javascript" src="assets/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="assets/swiper.js"></script>
     <script src="https://kit.fontawesome.com/2205d59d52.js" crossorigin="anonymous"></script>
     <script src="assets/ptj.js"></script>
+
+    <script>
+      // Tech icons animation
+      const techIcons = document.querySelectorAll('.tech-icon');
+      
+      techIcons.forEach(icon => {
+        let x = Math.random() * 5 - 2.5; // Random initial x velocity (-2.5 to 2.5)
+        let y = Math.random() * 5 - 2.5; // Random initial y velocity (-2.5 to 2.5)
+        let rotation = 0;
+        let isAnimating = false;
+
+        // Function to check collision with an element
+        function checkCollision(rect1, rect2) {
+          return !(rect1.right < rect2.left || 
+                  rect1.left > rect2.right || 
+                  rect1.bottom < rect2.top || 
+                  rect1.top > rect2.bottom);
+        }
+
+        // Function to handle collision effects
+        function handleCollision(icon) {
+          // Add extra glow on collision
+          icon.style.filter = `drop-shadow(0 0 20px currentColor) 
+                             drop-shadow(0 0 40px currentColor)
+                             drop-shadow(0 0 60px currentColor)`;
+          setTimeout(() => {
+            if (isAnimating) {
+              icon.style.filter = '';
+            }
+          }, 200);
+        }
+
+        icon.addEventListener('click', () => {
+          if (!isAnimating) {
+            isAnimating = true;
+            
+            // Get initial position
+            const rect = icon.getBoundingClientRect();
+            let posX = rect.left;
+            let posY = rect.top;
+            
+            // Add bouncing class after getting position
+            icon.classList.add('bouncing');
+            
+            // Animation function
+            function animate() {
+              if (!isAnimating) return;
+
+              // Update position
+              posX += x;
+              posY += y;
+              rotation = (rotation + 2) % 360;
+
+              // Get navigation and other elements to check for collisions
+              const nav = document.querySelector('.nav');
+              const navRect = nav.getBoundingClientRect();
+              const iconRect = icon.getBoundingClientRect();
+
+              // Check for collisions with window boundaries
+              if (posX <= 0 || posX + iconRect.width >= window.innerWidth) {
+                x = -x * 0.9; // Reverse direction and add some damping
+                handleCollision(icon);
+              }
+              if (posY <= 0 || posY + iconRect.height >= window.innerHeight) {
+                y = -y * 0.9; // Reverse direction and add some damping
+                handleCollision(icon);
+              }
+
+              // Check for collision with navigation
+              if (checkCollision(iconRect, navRect)) {
+                // Determine which side of the nav we hit
+                if (iconRect.bottom > navRect.top && iconRect.top < navRect.bottom) {
+                  x = -x * 0.9; // Hit from sides
+                } else {
+                  y = -y * 0.9; // Hit from top/bottom
+                }
+                handleCollision(icon);
+              }
+
+              // Apply position and rotation
+              icon.style.left = `${posX}px`;
+              icon.style.top = `${posY}px`;
+              icon.style.transform = `scale(1.5) rotate(${rotation}deg)`;
+
+              requestAnimationFrame(animate);
+            }
+
+            animate();
+          }
+        });
+        
+        // Double click to stop animation
+        icon.addEventListener('dblclick', () => {
+          isAnimating = false;
+          icon.classList.remove('bouncing');
+          icon.style.position = '';
+          icon.style.transform = '';
+          icon.style.left = '';
+          icon.style.top = '';
+          icon.style.filter = '';
+        });
+      });
+    </script>
   </body>
 </html>
