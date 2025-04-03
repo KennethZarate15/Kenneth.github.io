@@ -15,6 +15,15 @@
   </head>
 
   <body oncontextmenu="return false">
+    <!-- Video Background -->
+    <div class="video-background">
+      <video autoplay muted loop playsinline preload="auto" style="width: 100vw; height: 100vh;">
+        <source src="assets/video/background1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-overlay"></div>
+
     <header class="header" id="header">
       <nav class="nav container">
         <a href="#" class="nav__logo">
@@ -108,15 +117,28 @@
                 data-tooltip="GitHub">
                 <i class="uil uil-github-alt home__icon"></i>
               </a>
+
+              <a
+              href="https://www.instagram.com/be.ru_kun/"
+              target="_blank"
+              class="home__social-icon"
+              data-tooltip="Instagram">
+              <i class="uil uil-instagram home__icon"></i>
+            </a>
+            <a
+              href="https://twitter.com/"
+              target="_blank"
+              class="home__social-icon"
+              data-tooltip="Twitter">
+              <i class="uil uil-twitter home__icon"></i>
+            </a>
+
             </div>
 
             <div class="home__img">
               <div class="home__blob">
-                <img src="assets/img/Pro.jpg" alt="Kenneth's Profile" class="home__blob-img">
-                <div class="wave wave1"></div>
-                <div class="wave wave2"></div>
-                <div class="wave wave3"></div>
-                <div class="wave wave4"></div>
+                <img src="assets/img/pro.jpg" alt="" class="home__blob-img" />
+                <div class="home__blob-circuit"></div>
               </div>
             </div>
 
@@ -418,22 +440,8 @@
             </li>
           </ul>
 
-          <div class="footer__socials">
-            <a
-              href="https://www.instagram.com/be.ru_kun/"
-              class="footer__social"
-              target="__blank"
-            >
-            <i class="fa-brands fa-instagram"></i>
-            </a>
-
-            <a
-              href="https://twitter.com"
-              target="__blank"
-              class="footer__social"
-            >
-            <i class="fa-brands fa-x-twitter"></i>
-            </a>
+          
+       
           </div>
         </div>
 
